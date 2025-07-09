@@ -36,11 +36,15 @@ const client = new Client({
  client.on('message', async(msg)=>{
 	if(msg.from === "5521964987625@c.us"){
 		if(msg.hasMedia){
-			const media = await msg.downloadMedia()
+			
+				const media = await msg.downloadMedia()
+				await msg.reply("Recebi a planilha !")
+			
+		
 			const buffer = Buffer.from(media.data, 'base64')
 			const resp = await excel(buffer, {schema})
 			const {rows} = resp
-			rows.map(async(item)=>{
+			rows.map(async(item, index)=>{
 				//console.log(item.nome, item.telefone)
 				const id = await client.getNumberId(item.telefone)
 				//console.log(id._serialized)
@@ -48,8 +52,11 @@ const client = new Client({
 
 					setTimeout(async()=>{
 						await client.sendMessage(id._serialized,`Olá ${item.nome}! Aqui é da Leve Saúde. Você ainda está buscando um plano de saúde? Se sim, responda *SIM* para que eu possa te enviar mais informações.`)
-						console.log(`mensagem enviada para ${item.nome}`)
-					}, 60000)
+						//console.log(`mensagem enviada para ${item.nome}`)
+						await msg.reply(`mensagem enviada para ${item.nome}`)
+6						//console.log(item.nome)
+					}, 180000 * index)
+					
 				}
 				catch(error){
 					console.log(error.message)					
