@@ -1,5 +1,5 @@
-
-const {Client, LocalAuth} = require("whatsapp-web.js")
+	
+const {Client, LocalAuth, MessageMedia} = require("whatsapp-web.js")
 const excel = require('read-excel-file/node');
 const qrcode = require("qrcode-terminal")
 const {Sequelize, DataTypes} = require("sequelize")
@@ -32,16 +32,18 @@ const model = sequelize.define("leads", {
 //model.sync({force:true}).then(()=>console.log('tabela lead ceiada')).catch(error=>console.log(error.message))
 
 const schema = {
-  'nome': {
-    prop: 'nome',
-    type: String
-  },
-  'telefone': {
-    prop: 'telefone',
-    type: String
-  }
+  'nome': { prop: 'nome', type: String },
+  'telefone': { prop: 'telefone', type: String }
 }
 
+
+/*const schema = {
+    'telefone': {
+      prop: 'telefone',
+      type: String
+    }
+  }
+*/
 
 const client = new Client({
 	 authStrategy: new LocalAuth(), // mantém sessão salva loc
@@ -64,7 +66,7 @@ const client = new Client({
 	if(msg.from === "5521964987625@c.us" || msg.from === "5521986113683@c.us"){
 
 	
-
+		const criativo = await MessageMedia.fromFilePath("./ultimo_dia.jpg")
 		if(msg.hasMedia){
 			
 				const media = await msg.downloadMedia()
@@ -79,7 +81,7 @@ const client = new Client({
 				//console.log(item.nome, item.telefone)
 				try{
 					const id = await client.getNumberId(item.telefone)
-					const confere = await model.findAll({where:{fone_id:id._serialized}})
+					//const confere = await model.findAll({where:{fone_id:id._serialized}})
 					
 				
 					
@@ -91,11 +93,15 @@ const client = new Client({
 						setTimeout(async()=>{
 						//	if(!confere){
 								
+							const nome_a = item.nome.toUpperCase()
+							await client.sendMessage(id._serialized, criativo, {caption:`OLÁ *${nome_a}*! ÚLTIMO DIA PARA MANTERMOS AS CONDIÇÕES APRESENTADAS!!!\n\n*CARÊNCIA ZERO* PARA CONSULTAS ILIMITADAS, EXAMES SIMPLES E URGÊNCIA/EMERGÊNCIA.\n\n*SOMENTE ESSE MÊS, SEM TAXA DE ADESÃO E SEM COPARTICIPAÇÃO* ✅👩`})
 							
-							await client.sendMessage(id._serialized,`Olá ${item.nome}! Aqui é da Leve Saúde. Você ainda está buscando um plano de saúde? Se sim, responda *SIM* para que eu possa te enviar mais informações.`)
 						//console.log(`mensagem enviada para ${item.nome}`)
-							await model.create({nome:item.nome, fone:item.telefone, fone_id:id._serialized, resposta:'NAO'})
-							await msg.reply(`mensagem enviada para ${item.nome}`)
+						//	await model.create({nome:item.nome, fone:item.telefone, fone_id:id._serialized, resposta:'NAO'})
+						//	const nome = await client.getContactById(id._serialized)
+						//	console.log(nome)
+							await msg.reply(`mensagem enviada para ${nome_a}`)
+							console.log(`mensagem enviada para ${nome_a}`)
 						//console.log(item.nome)
 						///	}
 						//	else{
@@ -105,7 +111,7 @@ const client = new Client({
 				
 				}
 				catch(error){
-					console.log(error.message)
+					console.log(error)
 				}
 			})
 		}
