@@ -66,7 +66,7 @@ const client = new Client({
 	if(msg.from === "5521964987625@c.us" || msg.from === "5521986113683@c.us"){
 
 	
-		const criativo = await MessageMedia.fromFilePath("./ultimo_dia.jpg")
+		const criativo = await MessageMedia.fromFilePath("./prorrogado.jpg")
 		if(msg.hasMedia){
 			
 				const media = await msg.downloadMedia()
@@ -94,7 +94,7 @@ const client = new Client({
 						//	if(!confere){
 								
 							const nome_a = item.nome.toUpperCase()
-							await client.sendMessage(id._serialized, criativo, {caption:`OLÁ *${nome_a}*! ÚLTIMO DIA PARA MANTERMOS AS CONDIÇÕES APRESENTADAS!!!\n\n*CARÊNCIA ZERO* PARA CONSULTAS ILIMITADAS, EXAMES SIMPLES E URGÊNCIA/EMERGÊNCIA.\n\n*SOMENTE ESSE MÊS, SEM TAXA DE ADESÃO E SEM COPARTICIPAÇÃO* ✅👩`})
+							await client.sendMessage(id._serialized, criativo, {caption:`OLÁ *${nome_a}*! VIRADA DE TABELA PRORROGADA!!!\n\n*CARÊNCIA ZERO* PARA CONSULTAS ILIMITADAS, EXAMES SIMPLES E URGÊNCIA/EMERGÊNCIA.\n\n*SOMENTE ESSE MÊS, SEM TAXA DE ADESÃO E SEM COPARTICIPAÇÃO* ✅👩`})
 							
 						//console.log(`mensagem enviada para ${item.nome}`)
 						//	await model.create({nome:item.nome, fone:item.telefone, fone_id:id._serialized, resposta:'NAO'})
