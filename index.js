@@ -57,16 +57,21 @@ const client = new Client({
  	qrcode.generate(qr, {small:true})
  })
 
- client.on('ready', ()=>{
+ client.on('ready', async()=>{
  	console.log('whatsapp ativo')
- 	
+ 	const chat = await client.getChats()
+ 	chat.map(item=>{
+ 		if(item.isGroup){
+ 			console.log(item.name)
+ 		}
+ 	})
  })
 
  client.on('message', async(msg)=>{
 	if(msg.from === "5521964987625@c.us" || msg.from === "5521986113683@c.us"){
 
-	
-		const criativo = await MessageMedia.fromFilePath("./prorrogado.jpg")
+			
+		const criativo = await MessageMedia.fromFilePath("./todos_valores.jpg")
 		if(msg.hasMedia){
 			
 				const media = await msg.downloadMedia()
@@ -93,15 +98,15 @@ const client = new Client({
 						setTimeout(async()=>{
 						//	if(!confere){
 								
-							const nome_a = item.nome.toUpperCase()
-							await client.sendMessage(id._serialized, criativo, {caption:`OLÁ *${nome_a}*! VIRADA DE TABELA PRORROGADA!!!\n\n*CARÊNCIA ZERO* PARA CONSULTAS ILIMITADAS, EXAMES SIMPLES E URGÊNCIA/EMERGÊNCIA.\n\n*SOMENTE ESSE MÊS, SEM TAXA DE ADESÃO E SEM COPARTICIPAÇÃO* ✅👩`})
+						//	const nome_a = item.nome.toUpperCase()
+							await client.sendMessage(id._serialized, `Olá! Sou Allan Souza, consultor da Leve Saúde. Recebi seu pedido de cotação e vou te ajudar com as melhores opções! 😊🩺\n\nPara começarmos, me envie, por favor:\n\n1️⃣ Quantas pessoas serão incluídas?\n2️⃣ Idade de cada uma?\n3️⃣ Seu bairro?\n4️⃣ Possui MEI ou CNPJ?\n\nAguardo para te enviar a cotação! 💬`)
 							
 						//console.log(`mensagem enviada para ${item.nome}`)
 						//	await model.create({nome:item.nome, fone:item.telefone, fone_id:id._serialized, resposta:'NAO'})
 						//	const nome = await client.getContactById(id._serialized)
 						//	console.log(nome)
-							await msg.reply(`mensagem enviada para ${nome_a}`)
-							console.log(`mensagem enviada para ${nome_a}`)
+							await msg.reply(`mensagem enviada ${item.nome}`)
+							console.log(`mensagem enviada para ${item.nome} - ${item.telefone}`)
 						//console.log(item.nome)
 						///	}
 						//	else{
