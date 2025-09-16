@@ -71,7 +71,7 @@ const client = new Client({
 	if(msg.from === "5521964987625@c.us" || msg.from === "5521986113683@c.us"){
 
 			
-		const criativo = await MessageMedia.fromFilePath("./todos_valores.jpg")
+		const criativo = await MessageMedia.fromFilePath("./IMG-20250915-WA0570.jpg")
 		if(msg.hasMedia){
 			
 				const media = await msg.downloadMedia()
@@ -99,8 +99,8 @@ const client = new Client({
 						//	if(!confere){
 								
 						//	const nome_a = item.nome.toUpperCase()
-							await client.sendMessage(id._serialized, `Olá! Sou Allan Souza, consultor da Leve Saúde. Recebi seu pedido de cotação e vou te ajudar com as melhores opções! 😊🩺\n\nPara começarmos, me envie, por favor:\n\n1️⃣ Quantas pessoas serão incluídas?\n2️⃣ Idade de cada uma?\n3️⃣ Seu bairro?\n4️⃣ Possui MEI ou CNPJ?\n\nAguardo para te enviar a cotação! 💬`)
-							
+						await client.sendMessage(id._serialized, `Olá! Sou Allan Souza, consultor da Leve Saúde. Recebi seu pedido de cotação e vou te ajudar com as melhores opções! 😊🩺\n\nPara começarmos, me envie, por favor:\n\n1️⃣ Quantas pessoas serão incluídas?\n2️⃣ Idade de cada uma?\n3️⃣ Seu bairro?\n4️⃣ Possui MEI ou CNPJ?\n\nAguardo para te enviar a cotação! 💬`)
+					//	await client.sendMessage(id._serialized, criativo, {caption: '*Coleta domiciliar sem custo !*\n\nSou Allan, da *Leve Saúde*.\nNa cotação enviada, você já tem coleta domiciliar gratuita para exames.\nFechando conosco, o benefício é seu!\n\n👉 Me chame para conhecer outros *benefícios gratuitos*.'})
 						//console.log(`mensagem enviada para ${item.nome}`)
 						//	await model.create({nome:item.nome, fone:item.telefone, fone_id:id._serialized, resposta:'NAO'})
 						//	const nome = await client.getContactById(id._serialized)
